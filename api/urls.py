@@ -18,5 +18,5 @@ urlpatterns = [
     path('v1/token/refresh/', TokenRefreshView.as_view(),
          name='token_refresh'),
     path('v1/', include(router_v1.urls)),
-    path('v1/group', GroupList.as_view())
+    path('v1/group/', GroupList.as_view())
 ]
