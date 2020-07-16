@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions, viewsets, generics
+from django_filters.rest_framework import DjangoFilterBackend
 
 from api.permissions import IsOwnerOrReadOnly
 from api.serializers import CommentSerializer, PostSerializer, GroupSerializer
@@ -9,6 +10,8 @@ from api.models import Post, Group
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['group']
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
@@ -33,5 +36,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 class GroupList(generics.ListCreateAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ['title',]
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
