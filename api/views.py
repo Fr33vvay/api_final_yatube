@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, generics
 
 from api.permissions import IsOwnerOrReadOnly
-from api.serializers import CommentSerializer, PostSerializer
-from api.models import Post
+from api.serializers import CommentSerializer, PostSerializer, GroupSerializer
+from api.models import Post, Group
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -28,3 +28,8 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         get_object_or_404(Post, pk=self.kwargs.get('post_id'))
         serializer.save(author=self.request.user)
+
+
+class GroupList(generics.ListCreateAPIView):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
