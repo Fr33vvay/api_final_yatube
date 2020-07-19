@@ -49,7 +49,7 @@ class FollowList(generics.ListCreateAPIView):
         permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ['user', 'following']
-    search_fields = ['user__username', 'following__username']
+    search_fields = ['=user__username', '=following__username']
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
