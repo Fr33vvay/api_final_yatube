@@ -1,10 +1,9 @@
 from django.urls import include, path
-from rest_framework_simplejwt.views import (TokenObtainPairView,
-                                            TokenRefreshView, )
-
 from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
 
-from api.views import CommentViewSet, PostViewSet, GroupList, FollowList
+from api.views import CommentViewSet, FollowList, GroupList, PostViewSet
 
 router_v1 = DefaultRouter()
 router_v1.register(r'posts', PostViewSet)
