@@ -8,7 +8,7 @@ from api.views import CommentViewSet, PostViewSet, GroupList, FollowList
 
 router_v1 = DefaultRouter()
 router_v1.register(r'posts', PostViewSet)
-router_v1.register(r'posts/(?P<post_id>.+)/comments', CommentViewSet,
+router_v1.register(r'posts/(?P<post_id>\d+)/comments', CommentViewSet,
                    'comments')
 
 
